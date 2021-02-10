@@ -1,0 +1,54 @@
+---
+
+# - hosts: all
+#   vars_files:
+#     - vars.yml
+#   remote_user: root
+#   tasks:
+#   - name: Test var
+#     debug:
+#       msg: "{{ ssh_keys }}"
+
+
+
+- hosts: prod
+  remote_user: root
+  tasks:
+
+  - name: Set authorized key took from file for IC-IT
+    authorized_key:
+      user: root
+      state: present
+      key: "{{ lookup('file', 'public_keys/{{ item}}') }}"
+    with_items:
+    - "{{ admins }}"
+    - "{{ apprentis }}"
+
+  - name: Set authorized key took from file for IC-IT
+    authorized_key:
+      user: root
+      state: absent
+      key: "{{ lookup('file', 'public_keys/{{ item}}') }}"
+    with_items:
+    - "{{ yaplus }}"
+
+- hosts: dev
+  remote_user: root
+  tasks:
+
+  - name: Set authorized key took from file for IC-IT
+    authorized_key:
+      user: root
+      state: present
+      key: "{{ lookup('file', 'public_keys/{{ item}}') }}"
+    with_items:
+    - "{{ admins }}"
+    - "{{ apprentis }}"
+
+  - name: Remove all keys
+    authorized_key:
+      user: root
+      state: absent
+      key: "{{ lookup('file', 'public_keys/{{ item}}') }}"
+    with_items:
+    - "{{ yaplus }}"

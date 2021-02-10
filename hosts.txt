@@ -1,0 +1,16 @@
+[webserver]
+iccluster079.iccluster.epfl.ch
+
+[fileserver]
+iccluster079.iccluster.epfl.ch
+
+[domain]
+iccluster079.iccluster.epfl.ch
+
+
+[prod:children]
+webserver
+domain
+
+[dev:children]
+fileserver

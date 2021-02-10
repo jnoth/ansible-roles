@@ -1,0 +1,77 @@
+---
+
+- hosts: all
+  remote_user: root
+  vars:
+    ssh_keys:
+  tasks:
+  - name: Ansible Basic Variable Example
+    debug:
+      msg: "{{ ssh_keys }}"
+
+  # - name: Set authorized key took from file for IC-IT
+  #   authorized_key:
+  #     user: root
+  #     state: present
+  #     key: http://install.iccluster.epfl.ch/scripts/ic-it.keys
+
+  # - name: add SSH key labels to ~/.ssh/authorized_keys
+  #   user: root
+  #     lineinfile:
+  #       dest: ~/.ssh/authorized_keys
+  #       line: "{{ item }}"
+  #     with_items:
+  #     - jnoth
+  #     - cortinha
+
+      # - name: get SSH keys from GitHub
+#   hosts: fileserver
+#   remote_user: root
+#   tasks:
+#     - name: get ssh key from url
+#       uri:
+#          key: http://install.iccluster.epfl.ch/scripts/ic-it.keys
+
+# - name: Set authorized key took from file for IC-IT
+
+
+
+  # authorized_key:
+  #   user: root
+  #   state: present
+  #   key: http://install.iccluster.epfl.ch/scripts/ic-it.keys
+
+
+    # - name: Ansible Basic Variable Example
+    #   debug:
+    #     msg: "{{ ssh_keys.results.0.content }}"
+
+    # - name: Ansible Basic Variable Example
+    #   debug:
+    #     msg: "{{ ssh_keys.results.1.content }}"
+
+
+        # [1] marche pas
+
+    # - name: add SSH keys to ~/.ssh/authorized_keys
+    #   lineinfile:
+    #     dest: ~/.ssh/authorized_keys
+    #     line: "{{ item.0.content }}"
+    #     insertafter: "{{ item.1 }}"
+    #   with_together:
+    #     - ssh_keys.results
+    #     - add_ssh_keys_from_github.usernames
+    #   changed_when: false # FIXME
+    #   when: "add_ssh_keys_from_github.usernames | count > 0"
+
+
+# - name: set authorized keys taken from url
+#   ansible.posix.authorized_key:
+#     user: root
+#     state: present
+#     key: https://github.com/{{ item }}.keys
+#   with item :
+#   - carlosperezepfl
+#   - mistur
+#   - reyuce  
+...
