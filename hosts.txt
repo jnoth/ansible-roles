@@ -14,4 +14,3 @@ domain
 
 [dev:children]
 fileserver
-testtest
